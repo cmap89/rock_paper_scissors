@@ -14,9 +14,10 @@ const phrase3 = 'Scissors cuts Paper.';
 
 const winningPhrase = 'You win! Congratulations!';
 const losingPhrase = 'Sorry, try again.';
+const gameLosingPhrase = 'Sorry, you lost... :(';
 const drawPhrase = "It's a draw! Please try again.";
 
-const scorePhrase = document.querySelector('scoreDisp');
+const scorePhrase = document.querySelector('#scoreDisp');
 const pScoreDisp = document.querySelector('#pScoreCount');
 const cpuScoreDisp = document.querySelector('#cpuScoreCount');
 let p1Score = 0;
@@ -24,9 +25,17 @@ let cpuScore = 0;
 
 function gameOver() {
     if (p1Score === 5 || cpuScore === 5) {
+        scorePhrase.innerHTML = 'Final Score:'
         pRockBtn.disabled = true;
         pPaperBtn.disabled = true;
         pScissorsBtn.disabled = true;
+
+    };
+
+    if (p1Score === 5) {
+        statusDisplay.innerHTML = `${winningPhrase}`
+    } else if (cpuScore === 5) {
+        statusDisplay.innerHTML = `${gameLosingPhrase}`
     };
 }
 
