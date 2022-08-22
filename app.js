@@ -16,62 +16,85 @@ const winningPhrase = 'You win! Congratulations!';
 const losingPhrase = 'Sorry, try again.';
 const drawPhrase = "It's a draw! Please try again.";
 
+const scorePhrase = document.querySelector('scoreDisp');
+const pScoreDisp = document.querySelector('#pScoreCount');
+const cpuScoreDisp = document.querySelector('#cpuScoreCount');
+let p1Score = 0;
+let cpuScore = 0;
+
+function gameOver() {
+    if (p1Score === 5 || cpuScore === 5) {
+        pRockBtn.disabled = true;
+        pPaperBtn.disabled = true;
+        pScissorsBtn.disabled = true;
+    };
+}
 
 function rockOutcomes() {
     let num = Math.floor(Math.random() * choices.length);
     statusDisplay.innerHTML = `The CPU chose ${choices[num]}`;
     if (num === 2) {
-        setTimeout(() => statusDisplay.innerHTML = `${phrase1} ${winningPhrase}`, 1000);
+        p1Score += 1;
+        setTimeout(() => statusDisplay.innerHTML = `${phrase1} ${winningPhrase}`, 900);
     } if (num === 1) {
-        setTimeout(() => statusDisplay.innerHTML = `${phrase2} ${losingPhrase}`, 1000);
+        cpuScore += 1;
+        setTimeout(() => statusDisplay.innerHTML = `${phrase2} ${losingPhrase}`, 900);
     } if (num === 0) {
-        setTimeout(() => statusDisplay.innerHTML = `${drawPhrase}`, 1000);
+        setTimeout(() => statusDisplay.innerHTML = `${drawPhrase}`, 900);
     };
-    pRockBtn.disabled = true;
-    pPaperBtn.disabled = true;
-    pScissorsBtn.disabled = true;
+    setTimeout(() => pScoreDisp.innerHTML = `Player One: ${p1Score}`, 900);
+    setTimeout(() => cpuScoreDisp.innerHTML = `CPU: ${cpuScore}`, 900);
+    setTimeout(gameOver, 900)
 };
 
-pRockBtn.addEventListener('click', () => rockOutcomes());
+pRockBtn.addEventListener('click', rockOutcomes);
 
 function paperOutcomes() {
     let num = Math.floor(Math.random() * choices.length);
     statusDisplay.innerHTML = `The CPU chose ${choices[num]}`;
     if (num === 2) {
-        setTimeout(() => statusDisplay.innerHTML = `${phrase3} ${losingPhrase}`, 1000);
+        cpuScore += 1;
+        setTimeout(() => statusDisplay.innerHTML = `${phrase3} ${losingPhrase}`, 900);
     } if (num === 1) {
-        setTimeout(() => statusDisplay.innerHTML = `${drawPhrase}`, 1000);
+        setTimeout(() => statusDisplay.innerHTML = `${drawPhrase}`, 900);
     } if (num === 0) {
-        setTimeout(() => statusDisplay.innerHTML = `${phrase2} ${winningPhrase}`, 1000);
+        p1Score += 1;
+        setTimeout(() => statusDisplay.innerHTML = `${phrase2} ${winningPhrase}`, 900);
     };
-    pRockBtn.disabled = true;
-    pPaperBtn.disabled = true;
-    pScissorsBtn.disabled = true;
+    setTimeout(() => pScoreDisp.innerHTML = `Player One: ${p1Score}`, 900);
+    setTimeout(() => cpuScoreDisp.innerHTML = `CPU: ${cpuScore}`, 900);
+    setTimeout(gameOver, 900)
 }
 
-pPaperBtn.addEventListener('click', () => paperOutcomes());
+pPaperBtn.addEventListener('click', paperOutcomes);
 
 function scissorsOutcomes() {
     let num = Math.floor(Math.random() * choices.length);
     statusDisplay.innerHTML = `The CPU chose ${choices[num]}`;
     if (num === 2) {
-        setTimeout(() => statusDisplay.innerHTML = `${drawPhrase}`, 1000);
+        setTimeout(() => statusDisplay.innerHTML = `${drawPhrase}`, 900);
     } if (num === 1) {
-        setTimeout(() => statusDisplay.innerHTML = `${phrase3} ${winningPhrase}`, 1000);
+        p1Score += 1;
+        setTimeout(() => statusDisplay.innerHTML = `${phrase3} ${winningPhrase}`, 900);
     } if (num === 0) {
-        setTimeout(() => statusDisplay.innerHTML = `${phrase1} ${losingPhrase}`, 1000);
+        cpuScore += 1;
+        setTimeout(() => statusDisplay.innerHTML = `${phrase1} ${losingPhrase}`, 900);
     };
-    pRockBtn.disabled = true;
-    pPaperBtn.disabled = true;
-    pScissorsBtn.disabled = true;
+    setTimeout(() => pScoreDisp.innerHTML = `Player One: ${p1Score}`, 900);
+    setTimeout(() => cpuScoreDisp.innerHTML = `CPU: ${cpuScore}`, 900);
+    setTimeout(gameOver, 900)
 }
 
-pScissorsBtn.addEventListener('click', () => scissorsOutcomes());
+pScissorsBtn.addEventListener('click', scissorsOutcomes);
 
 
 
 resetBtn.addEventListener('click', function () {
     statusDisplay.innerHTML = 'Choose an option to play against the CPU.';
+    p1Score = 0;
+    cpuScore = 0;
+    pScoreDisp.innerHTML = `Player One: ${p1Score}`;
+    cpuScoreDisp.innerHTML = `CPU: ${cpuScore}`;
     pRockBtn.disabled = false;
     pPaperBtn.disabled = false;
     pScissorsBtn.disabled = false;
